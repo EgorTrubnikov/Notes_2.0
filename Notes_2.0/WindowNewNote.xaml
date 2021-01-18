@@ -1,0 +1,208 @@
+﻿<Window x:Class="Notes_2._0.WindowNewNote"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Notes_2._0"
+        mc:Ignorable="d"
+        Title="Новая заметка" Height="300" Width="800" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="15"/>
+            <Setter Property="MaxHeight" Value="35"/>
+            <Setter Property="MaxWidth" Value="100"/>
+            <Setter Property="MinHeight" Value="25"/>
+            <Setter Property="MinWidth" Value="100"/>
+            <Style.Triggers>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="BorderThickness" Value="3"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal"
+                    Grid.Row="0" Grid.Column="0">
+            <GroupBox Header="Тема заметки"
+                      Margin="5">
+                <TextBox x:Name="XXThemOfNote"
+                         Margin="5"
+                         Width="350"
+                         TextWrapping="Wrap"
+                         MaxLength="32"/>
+            </GroupBox>
+            <GroupBox Header="Дата"
+                      Margin="5">
+                <TextBlock x:Name="XXDateOfNote"
+                           Margin="5"
+                           Width="110"
+                           TextAlignment="Center"/>
+            </GroupBox>
+        </StackPanel>
+       
+
+        <GroupBox Header="Заметка"
+                  Grid.Row="1" Grid.Column="0" Grid.RowSpan="3"
+                  Margin="5">
+            <TextBox x:Name="XXNewNote"
+                     Margin="5"
+                     TextWrapping="Wrap"
+                     AcceptsReturn="True"
+                     AcceptsTab="True"/>
+
+        </GroupBox>
+
+        <GroupBox Header="Приоритет заметки"
+                  Grid.Row="0" Grid.Column="1"
+                  Margin="5">
+            <StackPanel Orientation="Horizontal"
+                        Margin="5">
+                <RadioButton Content="Высокий"
+                             Name="XXHighPriority"
+                             GroupName="Priority"
+                             Margin="10 3 30 3" 
+                             Checked="XXHighPriority_Checked" 
+                             />
+                <RadioButton Content="Без приоритета"
+                             Name="XXWithoutPriority"
+                             GroupName="Priority"
+                             Margin="0 3 0 3" 
+                             IsChecked="True"
+                             Checked="XXWithoutPriority_Checked" 
+                             />
+            </StackPanel>
+        </GroupBox>
+
+        <GroupBox Header="Статус заметки"
+                  Grid.Row="1" Grid.Column="1"
+                  Margin="5">
+            <Grid Margin="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <RadioButton Content="Важно"
+                             Name="XXImportant"
+                             GroupName="Status"
+                             Grid.Row="0" Grid.Column="0"
+                             Checked="XXImportant_Checked"
+                             />
+                <RadioButton Content="В работе"
+                             Name="XXInWork"
+                             GroupName="Status"
+                             IsChecked="True"
+                             Grid.Row="0" Grid.Column="1"
+                             Checked="XXInWork_Checked"
+                             />
+                <RadioButton Content="На память"
+                             Name="XXForMemory"
+                             GroupName="Status"
+                             Grid.Row="1" Grid.Column="0" 
+                             Checked="XXForMemory_Checked"
+                             />
+                <RadioButton Content="Архив"
+                             Name="XXArchive"
+                             GroupName="Status"
+                             Grid.Row="1" Grid.Column="1"
+                             Checked="XXArchive_Checked"
+                             />
+
+            </Grid>
+        </GroupBox>
+
+        <GroupBox Header="Дата следующего просмотра"
+                  Grid.Row="2" Grid.Column="1"
+                  Margin="5">
+            <Grid Margin="2 2 2 0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="День"
+                           Grid.Row="1" Grid.Column="0"
+                           HorizontalAlignment="Center"
+                           TextAlignment="Justify"
+                           FontSize="8" 
+                           Margin="0,2,0,0"
+                           Padding="0 4 0 0"
+                           VerticalAlignment="Bottom"/>
+                <ComboBox x:Name="XXNextDay"
+                         Grid.Row="0" Grid.Column="0"
+                         Margin="1"
+                         Padding="30, 0, 0, 3" 
+                          SelectionChanged="XXNextDay_SelectionChanged"
+ToolTip="Дата следующего просмотра выставляеся  только для статусов &quot;Важно&quot; и &quot;В работе&quot;"                         />
+
+                <TextBlock Text="Месяц"
+                           Grid.Row="1" Grid.Column="1"
+                           HorizontalAlignment="Center"
+                           TextAlignment="Justify"
+                           FontSize="8" 
+                           Margin="0,2,0,0"
+                           Padding="0 4 0 0"
+                           VerticalAlignment="Bottom"/>
+                <ComboBox x:Name="XXNextMonth"
+                         Grid.Row="0" Grid.Column="1"
+                         Margin="1"
+                          Padding="5, 0 ,0 , 3"
+ToolTip="Дата следующего просмотра выставляеся  только для статусов &quot;Важно&quot; и &quot;В работе&quot;"                          SelectionChanged="XXNextMonth_SelectionChanged"
+                         />
+
+                <TextBlock Text="Год"
+                           Grid.Row="1" Grid.Column="2"
+                           HorizontalAlignment="Center"
+                           TextAlignment="Justify"
+                           FontSize="8" 
+                           Margin="0,2,0,0"
+                           Padding="0 4 0 0"
+                           VerticalAlignment="Bottom"/>
+                <ComboBox x:Name="XXNextYear"
+                         Grid.Row="0" Grid.Column="2"
+                         Padding="25, 0, 0, 3"
+                         Margin="1"
+                          ToolTip="Дата следующего просмотра выставляеся  только для статусов &quot;Важно&quot; и &quot;В работе&quot;"
+                          SelectionChanged="XXNextYear_SelectionChanged"
+                         />
+
+            </Grid>
+        </GroupBox>
+
+        <StackPanel Grid.Row="3" Grid.Column="1"
+                    Margin="5"
+                    Orientation="Horizontal">
+            <Button x:Name="XXCancel"
+                    Content="Отмена"
+                    VerticalAlignment="Center"
+                    Click="XXCancel_Click"/>
+            <Button x:Name="XXOk"
+                    Content="Сохранить"
+                    VerticalAlignment="Center"
+                    Click="XXOk_Click"/>
+        </StackPanel>
+        
+    </Grid>
+</Window>

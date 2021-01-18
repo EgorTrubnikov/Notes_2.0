@@ -1,0 +1,294 @@
+﻿<Window x:Class="Notes_2._0.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Notes_2._0"
+        mc:Ignorable="d"
+        Title="Ежедневник" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="15"/>
+            <Setter Property="MaxHeight" Value="35"/>
+            <Setter Property="MaxWidth" Value="150"/>
+            <Setter Property="MinHeight" Value="35"/>
+            <Setter Property="MinWidth" Value="150"/>
+            <Style.Triggers>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="BorderThickness" Value="3"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="0.5*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+
+        <GroupBox Header="Все заметки"
+            Grid.Row="0" Grid.Column="0"
+                  Margin="5">
+            <ListBox x:Name="XListBoxAllNotes"
+                     SelectionChanged="XListBoxAllNotes_SelectionChanged" >
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderThickness="1"
+                                BorderBrush="LightGray"
+                                CornerRadius="3"
+                                >
+                            <StackPanel Orientation="Vertical"
+                                        >
+                                <TextBlock Text="{Binding TitleOfNote}"
+                                       Width="140"
+                                       TextAlignment="Center"
+                                       TextWrapping="Wrap"/>
+                                <TextBlock Text="{Binding TimeOfNote}"
+                                       Background="LightGray"
+                                       Width="150"
+                                       TextAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       FontSize="10"
+                                           Opacity="0.6"/>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </GroupBox>
+
+        <GroupBox Header="Смотреть на дату"
+                  Grid.Row="0" Grid.Column="1"
+                  Margin="5">
+            <ListBox x:Name="XListBoxToSeeOnDate"
+                     SelectionChanged="XListBoxToSeeOnDate_SelectionChanged"
+                     >
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderThickness="1"
+                                BorderBrush="LightGray"
+                                CornerRadius="3"
+                                >
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock Text="{Binding TitleOfNote}"
+                                       Width="140"
+                                       TextAlignment="Center"
+                                       TextWrapping="Wrap"/>
+                                <TextBlock Text="{Binding TimeOfNote}"
+                                       Background="LightGray"
+                                       Width="150"
+                                       TextAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       FontSize="10"
+                                           Opacity="0.6"/>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </GroupBox>
+
+        <GroupBox Header="Выбранная заметка"
+                  Grid.Row="0" Grid.Column="2"
+                  Margin="5">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="10*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Border Grid.Row="0" Grid.Column="0"
+                        BorderBrush="LightGray"
+                        BorderThickness="1"
+                        CornerRadius="3">
+                    <TextBlock Text="Дата:"
+                               TextAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="10"/>
+                </Border>
+                <Border Grid.Row="0" Grid.Column="1"
+                        BorderBrush="LightGray"
+                        BorderThickness="1"
+                        CornerRadius="3">
+                    <TextBlock x:Name="XNoteShowDate"
+                               TextAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="10"
+                               TextWrapping="Wrap" FontStretch="Expanded"/>
+                </Border>
+
+                <Border Grid.Row="0" Grid.Column="2"
+                        BorderBrush="LightGray"
+                        BorderThickness="1"
+                        CornerRadius="3">
+                    <TextBlock Text="Сл. Дата:"
+                               TextAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="10" Margin="0.2,-0.8,-0.2,-1.6"/>
+                </Border>
+                <Border Grid.Row="0" Grid.Column="3"
+                        BorderBrush="LightGray"
+                        BorderThickness="1"
+                        CornerRadius="3">
+                    <TextBlock x:Name="XNoteShowNextDate"
+                               TextAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="10"
+                               TextWrapping="Wrap"/>
+                </Border>
+
+                <Border Grid.Row="1" Grid.Column="0"
+                        BorderBrush="LightGray"
+                        BorderThickness="1"
+                        CornerRadius="3">
+                    <TextBlock Text="Тема:"
+                               TextAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="10" Margin="0.2,-0.8,-0.4,-1.6"/>
+                </Border>
+                <Border Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"
+                        BorderBrush="LightGray"
+                        BorderThickness="1"
+                        CornerRadius="3">
+                    <TextBlock x:Name="XNoteShowTheme"
+                               TextAlignment="Left"
+                               VerticalAlignment="Center"
+                               FontSize="10"
+                               Padding="3 0 0 0"
+                               />
+                </Border>
+
+                <GroupBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4"
+                          Header="Заметка" FontSize="10"
+                          Margin="3">
+
+                    <TextBox x:Name="XNoteShowNoteBody"
+                               Width="340"
+                               Height="195"
+                               TextAlignment="Left"
+                               VerticalAlignment="Top"
+                               TextWrapping="Wrap"
+                               Margin="3"
+                               Padding="5"
+                               FontSize="12"
+                               IsReadOnly="True"
+                               ScrollViewer.VerticalScrollBarVisibility="Auto"
+                               />
+                </GroupBox>
+
+                <Border Grid.Row="3" Grid.Column="0"
+                        BorderBrush="LightGray"
+                        BorderThickness="1"
+                        CornerRadius="3">
+                    <TextBlock Text="Приоритет:"
+                               TextAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="10"/>
+                </Border>
+                <Border Grid.Row="3" Grid.Column="1"
+                        BorderBrush="LightGray"
+                        BorderThickness="1"
+                        CornerRadius="3">
+                    <TextBlock x:Name="XNoteShowPriority"
+                               TextAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="10"/>
+                </Border>
+
+                <Border Grid.Row="3" Grid.Column="2"
+                        BorderBrush="LightGray"
+                        BorderThickness="1"
+                        CornerRadius="3">
+                    <TextBlock Text="Статус:"
+                               TextAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="10"/>
+                </Border>
+                <Border Grid.Row="3" Grid.Column="3"
+                        BorderBrush="LightGray"
+                        BorderThickness="1"
+                        CornerRadius="3">
+                    <TextBlock x:Name="XNoteShowStatus"
+                               TextAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="10"/>
+                </Border>
+            </Grid>
+
+        </GroupBox>
+
+        <Button x:Name="XAddNote"
+                Content="Новая заметка"
+                Grid.Row="1" Grid.Column="0"
+                Margin="1"
+                Click="XAddNote_Click">
+        </Button>
+
+
+        <StackPanel Orientation="Horizontal"
+                    Grid.Row="1" Grid.Column="2"
+                    >
+            <Button x:Name="XDelNote"
+                    Content="Удалить заметку"
+                    Click="XDelNote_Click" 
+                    Margin="25 0 15 0"/>
+
+            <Button x:Name="XEditNote"
+                    Margin="25 0 15 0"
+                    Content="Редактировать заметку"
+                    Click="XEditNote_Click"/>
+
+        </StackPanel>
+        <GroupBox Header="Сортировка списка заметок"
+            Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3"
+                  Margin="3 0 3 3">
+            <StackPanel Orientation="Horizontal"
+                    >
+                <RadioButton Content="по дате"
+                             Name="XRBAddNote"
+                             GroupName="XRBSort"
+                             VerticalAlignment="Center"
+                             Margin="10 0 70 0"
+                             Checked="XRBAddNote_Checked"
+                         />
+                <RadioButton Content="по теме"
+                             Name="XRBTheme"
+                             GroupName="XRBSort"
+                             VerticalAlignment="Center"
+                             Margin="70 0 70 0"
+                             Checked="XRBTheme_Checked"
+                         />
+                <RadioButton Content="по приоритету"
+                             Name="XRBPriority"
+                             GroupName="XRBSort"
+                             VerticalAlignment="Center"
+                             Margin="70 0 70 0"
+                             Checked="XRBPriority_Checked"
+                         />
+                <RadioButton Content="по статусу"
+                             Name="XRBStatus"
+                             GroupName="XRBSort"
+                             VerticalAlignment="Center"
+                             Margin="70 0 10 0"
+                             Checked="XRBStatus_Checked"
+                         />
+            </StackPanel>
+        </GroupBox>
+
+    </Grid>
+</Window>
