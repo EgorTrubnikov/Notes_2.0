@@ -65,18 +65,22 @@ namespace Notes_2._0
         //Кнопка Удалить заметку
         private void XDelNote_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                DataBaseOfNotes.AllNotesCollection.Remove(DataBaseOfNotes.NoteForShow[0]);
-                XListBoxAllNotes.Items.Refresh();
-            }
-            catch
-            {
-                DataBaseOfNotes.NoteForShow.Clear();
-                ShowNote.ClearDemonstrationWindow(this);
-                SavedAndLoaded.SavingNotes(DataBaseOfNotes.AllNotesCollection);
-            }
+            DeleteСonfirmation deleteСonfirmation = new DeleteСonfirmation();
+                if (deleteСonfirmation.ShowDialog() == true)
+                {
+                    try
+                    {
+                        DataBaseOfNotes.AllNotesCollection.Remove(DataBaseOfNotes.NoteForShow[0]);
+                        XListBoxAllNotes.Items.Refresh();
+                    }
+                    catch
+                    {
+                        DataBaseOfNotes.NoteForShow.Clear();
+                        ShowNote.ClearDemonstrationWindow(this);
+                        SavedAndLoaded.SavingNotes(DataBaseOfNotes.AllNotesCollection);
+                    }
 
+                }
         }
 
         // Кнопка Редактировать заметку

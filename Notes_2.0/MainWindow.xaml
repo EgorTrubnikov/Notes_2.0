@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Notes_2._0"
         mc:Ignorable="d"
-        Title="Ежедневник" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+        Title="Ежедневник" Height="450" Width="800"  ResizeMode="CanMinimize">
     <Window.Resources>
         <Style TargetType="Button">
             <Setter Property="Margin" Value="15"/>

@@ -1,0 +1,64 @@
+﻿<Window x:Class="Notes_2._0.DeleteСonfirmation"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Notes_2._0"
+        mc:Ignorable="d"
+        Title="Подтверждение удаления выбранной заметки." Height="250" Width="500" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="15"/>
+            <Setter Property="MaxHeight" Value="35"/>
+            <Setter Property="MaxWidth" Value="100"/>
+            <Setter Property="MinHeight" Value="25"/>
+            <Setter Property="MinWidth" Value="100"/>
+            <Style.Triggers>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="BorderThickness" Value="3"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="1.5*"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2"
+                CornerRadius="20"
+                BorderThickness="2"
+                BorderBrush="LightGray"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Height="120"
+                Width="350">
+            <TextBlock x:Name="XXXTextBlockWarning"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       TextWrapping="Wrap"
+                       TextAlignment="Center">
+                Вы действительно хотите удалить эту заметку?
+                <LineBreak/>
+                Эта операция необратима!
+            </TextBlock>
+        </Border>
+
+        <Button Grid.Column="0" Grid.Row="1"
+                IsCancel="True"
+                x:Name="XXXButtonCancel"
+                Content="Отмена"/>
+
+        <Button Grid.Column="1" Grid.Row="1"
+                IsDefault="True"
+                x:Name="XXXButtonOk"
+                Content="Удалить" 
+                Click="XXXButtonOk_Click"/>
+    </Grid>
+</Window>
