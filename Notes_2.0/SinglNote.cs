@@ -39,9 +39,20 @@ namespace Notes_2._0
             this.TimeOfRepeatRead = TimeOfRepeatRead;
         }
 
+        // Пустой конструктор.
+        public SinglNote()
+        {
+
+        }
+
         public bool Equals(SinglNote other)
         {
-            return this.BodyOfNote == other.BodyOfNote && this.TitleOfNote == other.TitleOfNote && this.TimeOfNote == other.TimeOfNote;
+            return this.BodyOfNote == other.BodyOfNote && 
+                   this.TitleOfNote == other.TitleOfNote && 
+                   this.TimeOfNote == other.TimeOfNote && 
+                   this.PriorityOfNote ==other.PriorityOfNote && 
+                   this.StatusOfNote == other.StatusOfNote && 
+                   this.TimeOfRepeatRead == other.TimeOfRepeatRead;
         }
 
         public class SortByDate : IComparer<SinglNote>

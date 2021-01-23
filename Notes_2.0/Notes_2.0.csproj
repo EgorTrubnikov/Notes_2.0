@@ -66,6 +66,9 @@
     <Compile Include="DataBaseOfNotes.cs" />
     <Compile Include="SavedAndLoaded.cs" />
     <Compile Include="SinglNote.cs" />
+    <Compile Include="WindowEditNote.xaml.cs">
+      <DependentUpon>WindowEditNote.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WindowNewNote.xaml.cs">
       <DependentUpon>WindowNewNote.xaml</DependentUpon>
     </Compile>
@@ -85,6 +88,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="WindowEditNote.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="WindowNewNote.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -25,6 +25,7 @@ namespace Notes_2._0
     {
         public MainWindow()
         {
+            
             InitializeComponent();
             SavedAndLoaded.LoadingNotes(DataBaseOfNotes.AllNotesCollection);
             XListBoxAllNotes.ItemsSource = DataBaseOfNotes.AllNotesCollection;
@@ -65,6 +66,12 @@ namespace Notes_2._0
         //Кнопка Удалить заметку
         private void XDelNote_Click(object sender, RoutedEventArgs e)
         {
+            if (DataBaseOfNotes.NoteForShow.Count == 0)
+            {
+                MessageBox.Show("Заметка на удаление не выбрана.", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
             DeleteСonfirmation deleteСonfirmation = new DeleteСonfirmation();
                 if (deleteСonfirmation.ShowDialog() == true)
                 {
@@ -86,6 +93,19 @@ namespace Notes_2._0
         // Кнопка Редактировать заметку
         private void XEditNote_Click(object sender, RoutedEventArgs e)
         {
+            if (DataBaseOfNotes.NoteForShow.Count == 0)
+            {
+                MessageBox.Show("Заметка для редактирования не выбрана.", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
+            WindowEditNote windowEditNote = new WindowEditNote();
+            foreach (Window window in App.Current.Windows)
+            {
+                if (window is MainWindow)
+                    window.Close();
+            }
+            windowEditNote.Show();
 
         }
 
@@ -102,7 +122,6 @@ namespace Notes_2._0
         {
             DataBaseOfNotes.AllNotesCollection.Sort(new SinglNote.SortByTitle());
             XListBoxAllNotes.Items.Refresh();
-
         }
 
         private void XRBPriority_Checked(object sender, RoutedEventArgs e)

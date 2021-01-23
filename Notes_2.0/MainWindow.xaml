@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Notes_2._0"
         mc:Ignorable="d"
-        Title="Ежедневник" Height="450" Width="800"  ResizeMode="CanMinimize">
+        Title="Ежедневник" Height="450" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize">
     <Window.Resources>
         <Style TargetType="Button">
             <Setter Property="Margin" Value="15"/>
@@ -47,15 +47,15 @@
                             <StackPanel Orientation="Vertical"
                                         >
                                 <TextBlock Text="{Binding TitleOfNote}"
-                                       Width="140"
-                                       TextAlignment="Center"
-                                       TextWrapping="Wrap"/>
-                                <TextBlock Text="{Binding TimeOfNote}"
-                                       Background="LightGray"
-                                       Width="150"
-                                       TextAlignment="Center"
-                                       VerticalAlignment="Center"
-                                       FontSize="10"
+                                           Width="140"
+                                           TextAlignment="Center"
+                                           TextWrapping="Wrap"/>
+                                <TextBlock Text="{Binding TimeOfNote}"  
+                                           Background="LightGray"
+                                           Width="150"
+                                           TextAlignment="Center"
+                                           VerticalAlignment="Center"
+                                           FontSize="10"
                                            Opacity="0.6"/>
                             </StackPanel>
                         </Border>

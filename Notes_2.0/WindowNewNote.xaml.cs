@@ -13,7 +13,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using System.Collections.ObjectModel;
 
 
 namespace Notes_2._0
@@ -24,19 +23,19 @@ namespace Notes_2._0
     /// </summary>
     public partial class WindowNewNote : Window
     {
-        string tempTimeNewNote;
-        string tempNewNoteTitle;
-        string tempNewNoteBody;
-        string tempNewNotePriority;
-        string tempNewNoteStatus;
-        DateTime tempNextDate;
+        string newTimeNewNote;
+        string newNoteTitle;
+        string newNoteBody;
+        string newNotePriority;
+        string newNoteStatus;
+        DateTime newNextDate;
 
         event SaveNotes save;
         public WindowNewNote()
         {
             InitializeComponent();
-            tempTimeNewNote = DateTime.Now.ToLongDateString();
-            XXDateOfNote.Text = tempTimeNewNote;
+            newTimeNewNote = DateTime.Now.ToLongDateString();
+            XXDateOfNote.Text = newTimeNewNote;
             XXNextDay.ItemsSource = CalendarClass.ObsDays;
             XXNextMonth.ItemsSource = CalendarClass.ObsMonth;
             XXNextYear.ItemsSource = CalendarClass.ObsYears;
@@ -46,42 +45,42 @@ namespace Notes_2._0
         #region // RadioButtons - приоритет заметки
         private void XXHighPriority_Checked(object sender, RoutedEventArgs e)
         {
-            if(tempNewNoteStatus == "архив")
+            if(newNoteStatus == "архив")
             {
                 MessageBox.Show("Статус заметки был выставлен как \"архив\".\nПри выборе варианта приоритета \"высокий\", статус заметки изменился на \"в работе\".", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
                 XXArchive.IsChecked = false;
                 XXInWork.IsChecked = true;
             }
-            tempNewNotePriority = "высокий";
+            newNotePriority = "высокий";
         }
 
         private void XXWithoutPriority_Checked(object sender, RoutedEventArgs e)
         {
-            tempNewNotePriority = "без приоритета";
+            newNotePriority = "без приоритета";
         }
         #endregion
 
         #region // RadioButtons - статус заметки
         private void XXImportant_Checked(object sender, RoutedEventArgs e)
         {
-            tempNewNoteStatus = "важно";
+            newNoteStatus = "важно";
         }
 
         private void XXInWork_Checked(object sender, RoutedEventArgs e)
         {
-            tempNewNoteStatus = "в работе";
+            newNoteStatus = "в работе";
         }
 
         private void XXForMemory_Checked(object sender, RoutedEventArgs e)
         {
-            if (tempNewNotePriority == "высокий")
+            if (newNotePriority == "высокий")
             {
                 MessageBox.Show("Приоритет заметки выставлен как \"высокий\".\nЧто бы выставить статус \"на память\", сначала измените значение приоритета.", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
                 XXForMemory.IsChecked = false;
                 XXInWork.IsChecked = true;
             }
 
-            tempNewNoteStatus = "на память";
+            newNoteStatus = "на память";
             XXNextDay.SelectedIndex = -1;
             XXNextMonth.SelectedIndex = -1;
             XXNextYear.SelectedIndex = -1;
@@ -89,13 +88,13 @@ namespace Notes_2._0
 
         private void XXArchive_Checked(object sender, RoutedEventArgs e)
         {
-            if(tempNewNotePriority == "высокий")
+            if(newNotePriority == "высокий")
             {
                 MessageBox.Show("Приоритет заметки выставлен как \"высокий\".\nЧто бы выставить статус \"архив\", сначала измените значение приоритета.", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
                 XXArchive.IsChecked = false;
                 XXInWork.IsChecked = true;
             }
-            tempNewNoteStatus = "архив";
+            newNoteStatus = "архив";
             XXNextDay.SelectedIndex = -1;
             XXNextMonth.SelectedIndex = -1;
             XXNextYear.SelectedIndex = -1;
@@ -131,17 +130,17 @@ namespace Notes_2._0
                 // Проверка заголовка заметки, если пустой, в конструктор идёт значение "без названия".
                 if (XXThemOfNote.Text.Length > 0)
                 {
-                    tempNewNoteTitle = XXThemOfNote.Text;
+                    newNoteTitle = XXThemOfNote.Text;
                 }
                 else
                 {
-                    tempNewNoteTitle = "без названия";
+                    newNoteTitle = "без названия";
                 }
 
                 // Проверка тела заметки, обязательно должно быть заполнено.
                 if (XXNewNote.Text.Length > 0)
                 {
-                    tempNewNoteBody = XXNewNote.Text;
+                    newNoteBody = XXNewNote.Text;
                 }
                 else
                 {
@@ -190,11 +189,11 @@ namespace Notes_2._0
                     }
 
                     // Инициализация даты следующего обращения к заметке.
-                    tempNextDate = new DateTime(year, month, day);
+                    newNextDate = new DateTime(year, month, day);
 
-                    if (tempNextDate <= DateTime.Now && tempNextDate != DateTime.MinValue) // Если дата следующего обращения к заметке меньше текущей.
+                    if (newNextDate <= DateTime.Now && newNextDate != DateTime.MinValue) // Если дата следующего обращения к заметке меньше текущей.
                     {
-                        tempNextDate = DateTime.Now.AddDays(1);
+                        newNextDate = DateTime.Now.AddDays(1);
                     }
                 }
                 catch (Exception z)
@@ -203,8 +202,8 @@ namespace Notes_2._0
                 }
 
                 // Создаём экземпляр заметки и добавляем его в общую коллекцию заметок.
-                DataBaseOfNotes.AllNotesCollection.Add(new SinglNote(tempTimeNewNote, tempNewNoteTitle,
-                    tempNewNoteBody, tempNewNotePriority, tempNewNoteStatus, tempNextDate));
+                DataBaseOfNotes.AllNotesCollection.Add(new SinglNote(newTimeNewNote, newNoteTitle,
+                    newNoteBody, newNotePriority, newNoteStatus, newNextDate));
 
                 save?.Invoke(DataBaseOfNotes.AllNotesCollection);
 
@@ -218,9 +217,9 @@ namespace Notes_2._0
                 mainWindow.Show();
 
             }
-            catch(Exception z)
+            catch
             {
-                MessageBox.Show(z.Message);
+
             }
         }
         #endregion
